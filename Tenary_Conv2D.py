@@ -90,10 +90,14 @@ def Tenary_Conv2D(x, out_channel, kernel_shape,
         b_init = tf.constant_initializer()
 
     W = tf.get_variable('W', filter_shape, initializer=W_init)
-
+    Tenary_W = tf.get_variable('Tenary_W', filter_shape, initializer=W_init)
+    Tenary_W = tenary_opration(W)
+    tf.summary.histogram('Tenary_W',Tenary_W)#I can see Tenary_W is -1,0,+1,but can't saver it correctly in checkpoint.
+	                                     #Thanks for helping solving it.
     if use_bias:
         b = tf.get_variable('b', [out_channel], initializer=b_init)
-    Tenary_W = tenary_opration(W)
+   
+    
     if split == 1:
         conv = tf.nn.conv2d(x, Tenary_W, stride, padding, data_format=data_format)
     else:
