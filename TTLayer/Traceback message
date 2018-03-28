@@ -1,0 +1,36 @@
+Traceback (most recent call last):
+  File "mnist-tflayers.py", line 140, in <module>
+    launch_train_with_config(config, SimpleTrainer())
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/train/interface.py", line 91, in launch_train_with_config
+    extra_callbacks=config.extra_callbacks)
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/train/base.py", line 331, in train_with_defaults
+    steps_per_epoch, starting_epoch, max_epoch)
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/train/base.py", line 301, in train
+    self.setup_callbacks(callbacks, monitors)
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/utils/argtools.py", line 182, in wrapper
+    return func(*args, **kwargs)
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/train/base.py", line 211, in setup_callbacks
+    self._callbacks.setup_graph(weakref.proxy(self))
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/callbacks/base.py", line 52, in setup_graph
+    self._setup_graph()
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/callbacks/group.py", line 66, in _setup_graph
+    cb.setup_graph(self.trainer)
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/callbacks/base.py", line 52, in setup_graph
+    self._setup_graph()
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/callbacks/inference_runner.py", line 142, in _setup_graph
+    self._input_source, self.trainer.tower_func)
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/graph_builder/predict.py", line 49, in build
+    return tower_fn(*inputs)
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/tfutils/tower.py", line 207, in __call__
+    output = self._tower_fn(*args)
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/tensorpack/graph_builder/model_desc.py", line 234, in _build_graph_get_cost
+    ret = self.build_graph(*inputs)
+  File "mnist-tflayers.py", line 54, in build_graph
+    logits = TTDense(row_dims=[512, 1, 1, 1], column_dims=[1, 2, 5, 1], tt_rank=16)(l)
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/keras/engine/topology.py", line 592, in __call__
+    self.build(input_shapes[0])
+  File "/home/wc/ResNet/ok/utils/tt_dense.py", line 60, in build
+    self.W = t3f.get_variable(name, initializer=initializer)
+  File "/home/wc/tfpy27/local/lib/python2.7/site-packages/t3f/variables.py", line 73, in get_variable
+    'set reuse=None in VarScope?' % name)
+ValueError: ValueError: Variable tt_dense_matrix_1 does not exist, or was not created with t3f.get_tt_variable(). Did you mean to set reuse=None in VarScope?
